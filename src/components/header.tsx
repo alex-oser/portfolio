@@ -1,30 +1,21 @@
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
-import { AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { LinkedIn } from "./socials/LinkedIn";
 
 const Header = ({ siteTitle }: { siteTitle: string }) => {
   const classes = useStyles();
 
   return (
-    <AppBar position="sticky">
+    <div className={classes.header}>
       <div className={classes.headerContents}>
         <div style={{ alignSelf: "center" }}>
           <Link to="/" className={classes.link}>
             {siteTitle}
           </Link>
-          <Link to="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link}>
-            <StaticImage
-              src="../images/linkedin.svg"
-              width={20}
-              quality={95}
-              // formats={["AUTO", "WEBP", "AVIF"]}
-              alt="LinkedIn logo"
-            />
-          </Link>
+          <LinkedIn />
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignSelf: "center" }}>
           <Link to="/" className={classes.link}>
             About
           </Link>
@@ -36,7 +27,7 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
           </Link>
         </div>
       </div>
-    </AppBar>
+    </div>
   );
 };
 
@@ -46,9 +37,18 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
     margin: theme.spacing(1),
   },
+  header: {
+    top: 0,
+    left: "auto",
+    right: 0,
+    position: "sticky",
+    height: theme.spacing(6),
+    marginBottom: theme.spacing(2),
+  },
   headerContents: {
     display: "flex",
     justifyContent: "space-around",
+    height: "100%",
   },
 }));
 

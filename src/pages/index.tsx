@@ -1,4 +1,4 @@
-import { Link, PageProps } from "gatsby";
+import { PageProps } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
