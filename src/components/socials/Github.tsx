@@ -2,16 +2,16 @@ import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { makeStyles } from "@material-ui/core/styles";
 
-export const LinkedIn = () => {
+export const Github = () => {
   const classes = useStyles();
   return (
-    <Link to="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link}>
+    <Link to="https://github.com/alex-oser" className={classes.link}>
       <StaticImage
-        src="../../images/linkedin.svg"
+        src="../../images/github.svg"
         width={20}
         quality={95}
         // formats={["AUTO", "WEBP", "AVIF"]}
-        alt="LinkedIn logo"
+        alt="Github logo"
       />
     </Link>
   )

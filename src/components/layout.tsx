@@ -12,7 +12,7 @@ import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Header from "./header";
 
-const Layout = ({ children }: { children: any }) => {
+export const Layout = ({ children }: { children: any }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -58,5 +58,3 @@ const Layout = ({ children }: { children: any }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default Layout;

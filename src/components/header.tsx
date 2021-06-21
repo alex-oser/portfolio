@@ -2,18 +2,20 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import { makeStyles } from "@material-ui/core/styles";
 import { LinkedIn } from "./socials/LinkedIn";
+import { Github } from "./socials/Github";
 
 const Header = ({ siteTitle }: { siteTitle: string }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.header}>
+    <div className={classes.root}>
       <div className={classes.headerContents}>
         <div style={{ alignSelf: "center" }}>
           <Link to="/" className={classes.link}>
             {siteTitle}
           </Link>
           <LinkedIn />
+          <Github />
         </div>
         <div style={{ display: "flex", alignSelf: "center" }}>
           <Link to="/" className={classes.link}>
@@ -37,11 +39,11 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
     margin: theme.spacing(1),
   },
-  header: {
+  root: {
     top: 0,
     left: "auto",
     right: 0,
-    position: "sticky",
+    // position: "sticky",
     height: theme.spacing(6),
     marginBottom: theme.spacing(2),
   },
