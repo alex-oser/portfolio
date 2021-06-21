@@ -21,7 +21,6 @@ const query = graphql`
 export const Projects = () => {
   const data = useStaticQuery(query);
   const projects = data.allMdx.nodes;
-  console.log(projects);
   return (
     <GridLayout title={"Projects"}>
       {projects.map((project: any) => {
@@ -33,7 +32,7 @@ export const Projects = () => {
         } = project.frontmatter;
         return (
           <ProjectCard 
-            key={project} 
+            key={project.frontmatter.title} 
             title={title}
             status={status}
             caption={caption}
