@@ -1,18 +1,18 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
-
+import { MDXRenderer } from "gatsby-plugin-mdx";
 interface ProjectProps extends PageProps {
   pageContext: {
-    title: string
+    title: string,
+    body: any,
   }
 }
 
-const ProjectPage = (props: ProjectProps) => {
-
+const ProjectPage = ({ pageContext }: ProjectProps) => {
   return (
     <Layout>
       <div>
-        {props.pageContext.title} is a sick project YO
+        <MDXRenderer>{pageContext.body}</MDXRenderer>
       </div>
     </Layout>
   )

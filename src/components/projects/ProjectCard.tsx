@@ -1,32 +1,34 @@
 import { 
-  Card,
   CardContent,
   CardActions,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "gatsby";
+import { CardLayout } from "../CardLayout";
+import { ProjectStatus } from "./ProjectStatus";
 
 export const ProjectCard = ({ title, status, caption, link }: { title: string, status: string, caption: string, link: string, }) => {
   const classes = useStyles();
   return (
-    <Link to={`/projects/${title.toLowerCase()}`} style={{ textDecoration: "none"}}>
-      <Card className={classes.root}>
+    <CardLayout className={classes.layout} path={`projects/${title}`}>
         <CardContent>
-          <Typography>Title: {title}</Typography>
-          <Typography>Status: {status}</Typography>
-          <Typography>Description: {caption}</Typography>
+          <div style={{ display: "flex" }}>
+            <Typography variant="h6"><strong>{title}</strong></Typography>
+            <ProjectStatus status={status} />
+          </div>
+          <Typography>{caption}</Typography>
         </CardContent>
         <CardActions>
-          <Typography>Link: {link}</Typography>
+          <Typography>{link}</Typography>
         </CardActions>
-      </Card>
-    </Link>
+    </CardLayout>
   )
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
+  layout: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   }
 }))

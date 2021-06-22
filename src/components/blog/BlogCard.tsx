@@ -1,30 +1,27 @@
-import { 
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-} from "@material-ui/core";
+import { CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { CardLayout } from "../CardLayout";
 
-export const BlogCard = ({ title }: { title: string }) => {
+export const BlogCard = ({
+  title,
+  date,
+  caption,
+}: {
+  title: string;
+  date: string;
+  caption: string;
+}) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <CardLayout path={`/blog/${title}`}>
       <CardContent>
-        <Typography>THis</Typography>
-        <Typography>BLOG</Typography>
-        <Typography>is</Typography>
-        <Typography>{title}</Typography>
+        <Typography variant="h6"><strong>{title}</strong></Typography>
+        <Typography variant="subtitle2">{(new Date(date)).toDateString()}</Typography>
+        <Typography>{caption}</Typography>
       </CardContent>
-      <CardActions>
-
-      </CardActions>
-    </Card>
-  )
-}
+    </CardLayout>
+  );
+};
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-  }
-}))
+}));

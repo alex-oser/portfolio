@@ -1,19 +1,18 @@
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import { ReactChild, ReactChildren } from "react";
 
 export const GridLayout = ({
   children,
   title,
 }: {
-  children: ReactChild | ReactChildren | ReactChild[] | ReactChildren[];
+  children: React.ReactNode;
   title: string;
 }) => {
   const classes = useStyles();
 
   return (
     <>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h4" className={classes.title}>{title}</Typography>
       <div className={classes.projectsGrid}>{children}</div>
     </>
   );
@@ -33,4 +32,7 @@ const useStyles = makeStyles(theme => ({
       gridTemplateColumns: "repeat(1, 1fr)",
     },
   },
+  title: {
+    marginBottom: theme.spacing(1),
+  }
 }));

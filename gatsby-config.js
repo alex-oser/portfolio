@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `alex-oser`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `A jumping off point to see everything I do`,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -19,29 +19,18 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `blogs`,
-    //     path: `${__dirname}/blog`,
-    //   },
-    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `projects`,
-        path: `${__dirname}/projects`,
+        path: `${__dirname}/blog`,
+        name: "blog",
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        // Footnotes mode (default: true)
-        footnotes: true,
-        // GitHub Flavored Markdown mode (default: true)
-        gfm: true,
-        // Plugins configs
-        plugins: [],
+        path: `${__dirname}/projects`,
+        name: "projects",
       },
     },
     {
