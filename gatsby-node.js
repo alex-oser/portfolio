@@ -34,8 +34,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const ProjectPage = path.resolve("src/components/projects/ProjectPage.tsx");
-  const BlogPage = path.resolve("src/components/blog/BlogPage.tsx");
+  const ProjectLayout = path.resolve("src/components/projects/ProjectLayout.tsx");
+  const BlogLayout = path.resolve("src/components/blog/BlogLayout.tsx");
 
   // Create project pages.
   const projects = projectsData.data.allMdx.edges;
@@ -48,7 +48,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: `/projects/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
-      component: ProjectPage,
+      component: ProjectLayout,
       context: {
         title: post.node.frontmatter.title,
         body: post.node.body,
@@ -69,9 +69,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: `/blog/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
-      component: BlogPage,
+      component: BlogLayout,
       context: {
         title: post.node.frontmatter.title,
+        body: post.node.body,
         previous,
         next,
       },

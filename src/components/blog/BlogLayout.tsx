@@ -1,14 +1,16 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-interface ProjectProps extends PageProps {
+
+interface BlogProps extends PageProps {
   pageContext: {
     title: string,
     body: any,
   }
 }
 
-const ProjectPage = ({ pageContext }: ProjectProps) => {
+const BlogLayout = ({ pageContext }: BlogProps) => {
+
   return (
     <Layout>
       <div>
@@ -18,4 +20,4 @@ const ProjectPage = ({ pageContext }: ProjectProps) => {
   )
 }
 
-export default ProjectPage;
+export default BlogLayout;
