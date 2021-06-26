@@ -10,7 +10,7 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
   return (
     <div className={classes.root}>
       <div className={classes.headerContents}>
-        <div style={{ alignSelf: "center" }}>
+        <div className={classes.headerLeft}>
           <Link to="/" className={classes.link}>
             {siteTitle}
           </Link>
@@ -52,6 +52,10 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-around",
     height: "100%",
   },
+  headerLeft: {
+    display: "flex",
+    alignItems: "center",
+  }
 }));
 
 Header.propTypes = {

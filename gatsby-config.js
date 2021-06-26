@@ -8,10 +8,19 @@ module.exports = {
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
-    `gatsby-plugin-mdx`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        rehypePlugins: [
+          // To pass options, use a 2-element array with the
+          // configuration in an object in the second element
+          require("rehype-autolink-headings"),
+        ],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

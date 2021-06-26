@@ -1,17 +1,11 @@
-import { StaticImage } from "gatsby-plugin-image";
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from "@material-ui/core/styles";
 
 export const Github = () => {
   const classes = useStyles();
   return (
     <a href="https://github.com/alex-oser" className={classes.link}>
-      <StaticImage
-        src="../../images/github.svg"
-        width={20}
-        quality={95}
-        // formats={["AUTO", "WEBP", "AVIF"]}
-        alt="Github logo"
-      />
+      <GitHubIcon />
     </a>
   )
 }

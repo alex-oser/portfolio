@@ -6,13 +6,11 @@ const query = graphql`
   {
     allMdx(
       filter: {fileAbsolutePath: {regex: "/blog/"}}
-      sort: {fields: [frontmatter___date], order: DESC}
     ) {
       nodes {
         slug
         frontmatter {
           title
-          date
           caption
         }
       }

@@ -13,21 +13,21 @@ export const ProjectCard = ({ title, status, caption, link }: { title: string, s
   const classes = useStyles();
   return (
     <CardLayout className={classes.layout} path={`projects/${title}`}>
-        <CardContent>
-          <div style={{ display: "flex" }}>
-            <Typography variant="h6"><strong>{title}</strong></Typography>
-            <ProjectStatus status={status} />
-          </div>
-          <Typography>{caption}</Typography>
-        </CardContent>
-        <CardActions>
-          <a target="_blank" href="https://github.com/alex-oser" onClick={e => e.stopPropagation()}>
-            <GitHubIcon color="primary" />
-          </a>
-          {link && <a target="_blank" href={link} onClick={e => e.stopPropagation()}>
-            <LanguageIcon color="primary" />
-          </a>}
-        </CardActions>
+      <CardContent>
+        <div style={{ display: "flex" }}>
+          <Typography variant="h6"><strong>{title}</strong></Typography>
+          <ProjectStatus status={status} />
+        </div>
+        <Typography>{caption}</Typography>
+      </CardContent>
+      <CardActions>                 
+        <a target="_blank" href="https://github.com/alex-oser" onClick={e => e.stopPropagation()}>
+          <GitHubIcon color="primary" />
+        </a>
+        {link && <a target="_blank" href={link} onClick={e => e.stopPropagation()}>
+          <LanguageIcon color="primary" />
+        </a>}
+      </CardActions>
     </CardLayout>
   )
 }
