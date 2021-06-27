@@ -6,7 +6,6 @@ export const CodeRenderer = ({language, code} : {language: any, code: string}) =
   const classes = useStyles();
   // Remove beginning and end new line, helps to pass in code like this though
   const trimmed=code.replace(/^(\s)+|(\s)+$/g,"");
-  console.log(trimmed)
   return (
     <Highlight {...defaultProps} theme={theme} code={trimmed} language={language}>
       {({ style, tokens, getLineProps, getTokenProps }) => (

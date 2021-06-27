@@ -15,6 +15,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               node {
                 frontmatter {
                   title
+                  date
                 }
                 body
               }
@@ -73,6 +74,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         title: post.node.frontmatter.title,
         body: post.node.body,
+        date: post.node.frontmatter.date,
         previous,
         next,
       },

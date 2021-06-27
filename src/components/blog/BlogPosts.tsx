@@ -12,6 +12,7 @@ const query = graphql`
         frontmatter {
           title
           caption
+          date
         }
       }
     }
