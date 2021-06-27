@@ -14,11 +14,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        rehypePlugins: [
-          // To pass options, use a 2-element array with the
-          // configuration in an object in the second element
-          require("rehype-autolink-headings"),
-        ],
+        gatsbyRemarkPlugins: [ `gatsby-remark-autolink-headers` ],
+        plugins: [ `gatsby-remark-autolink-headers` ],
       },
     },
     {

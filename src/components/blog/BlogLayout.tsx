@@ -1,7 +1,6 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-
 interface BlogProps extends PageProps {
   pageContext: {
     title: string,
@@ -10,10 +9,9 @@ interface BlogProps extends PageProps {
 }
 
 const BlogLayout = ({ pageContext }: BlogProps) => {
-
   return (
     <Layout>
-      <div>
+      <div style={{ padding: 8 }}>
         <MDXRenderer>{pageContext.body}</MDXRenderer>
       </div>
     </Layout>

@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left",
     padding: theme.spacing(1),
     overflow: 'auto',
+    borderRadius: 4,
   },
   lineNo: {
     display: 'table-cell',
