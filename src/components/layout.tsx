@@ -27,6 +27,12 @@ export const Layout = ({ children }: { children: any }) => {
     palette: {
       type: 'dark',
     },
+    typography: {
+      fontFamily: [
+        "Comfortaa",
+        "Roboto"
+      ].join(','),
+    }
   });
 
   return (

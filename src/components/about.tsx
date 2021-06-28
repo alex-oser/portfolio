@@ -7,9 +7,15 @@ import { useWindowSize } from "./hooks";
 
 export const Profile = forwardRef((props: any, ref: any) => {
   return (
-    <Typography variant="h5" className={props.className}>
+    <Typography className={props.className} variant="h5">
       I like to build things, climb things, and throw things for{" "}
       <span ref={ref}>Sadie</span>
+      <StaticImage
+        src="../images/bone.svg"
+        width={50}
+        quality={95}
+        alt="A dog bone"
+      />
     </Typography>
   );
 });
@@ -49,12 +55,14 @@ export const About = () => {
               alt="A Gatsby astronaut"
             />
           </div>
-          <StaticImage
-            src="../images/me.tiff"
-            width={600}
-            quality={95}
-            alt="A Gatsby astronaut"
-          />
+          <div className={classes.hideMobile}>
+            <StaticImage
+              src="../images/me.tiff"
+              width={600}
+              quality={95}
+              alt="A Gatsby astronaut"
+            />
+          </div>
         </div>
         <div className={classes.hideMobile}>
           <CurvedArrow
