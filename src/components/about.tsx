@@ -1,32 +1,85 @@
+import { forwardRef, useRef, useEffect, useState } from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { StaticImage } from "gatsby-plugin-image";
+import { CurvedArrow } from "./CurvedArrow";
+import { useWindowSize } from "./hooks";
 
-export const Profile = ({ className }: { className: string }) => {
+export const Profile = forwardRef((props: any, ref: any) => {
   return (
-    <Typography variant="h5" className={className}>
-      I like to build things, climb things, and throw things for Sadie
+    <Typography variant="h5" className={props.className}>
+      I like to build things, climb things, and throw things for{" "}
+      <span ref={ref}>Sadie</span>
     </Typography>
   );
-};
+});
 
 export const About = () => {
   const classes = useStyles();
+  const fromRef = useRef<HTMLDivElement>(null);
+  const fromRefMobile = useRef<HTMLDivElement>(null);
+  const toRef = useRef<HTMLDivElement>(null);
+  const [fromRect, setFromRect] = useState<DOMRect | null>(null);
+  const [fromRectMobile, setFromRectMobile] = useState<DOMRect | null>(null);
+  const [toRect, setToRect] = useState<DOMRect | null>(null);
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (!fromRef.current) return;
+    setFromRect(fromRef.current.getBoundingClientRect());
+    if (!toRef.current) return;
+    setToRect(toRef.current.getBoundingClientRect());
+    if (!fromRefMobile.current) return;
+    setFromRectMobile(fromRefMobile.current.getBoundingClientRect());
+  }, [windowSize]);
+
   return (
     <div className={classes.root}>
       <div className={classes.flex}>
         <div className={classes.textContainer}>
           <Typography variant="h3">Hi, I'm Alex</Typography>
-          <Profile className={classes.hideMobile} />
+          <Profile className={classes.hideMobile} ref={fromRef} />
         </div>
-        <StaticImage
-          src="../images/hello.svg"
-          width={600}
-          quality={95}
-          alt="A Gatsby astronaut"
-        />
+        <div style={{ display: "flex" }}>
+          <div ref={toRef} style={{ alignSelf: "flex-end", marginRight: -100 }}>
+            <StaticImage
+              src="../images/sadie.tiff"
+              width={400}
+              quality={95}
+              alt="A Gatsby astronaut"
+            />
+          </div>
+          <StaticImage
+            src="../images/me.tiff"
+            width={600}
+            quality={95}
+            alt="A Gatsby astronaut"
+          />
+        </div>
+        <div className={classes.hideMobile}>
+          <CurvedArrow
+            fromRect={fromRect}
+            toRect={toRect}
+            middleY={-90}
+            fromOffsetY={-20}
+            toOffsetX={-60}
+            zIndex={99}
+            color="#FF8484"
+          />
+        </div>
+        <div className={classes.showMobile}>
+          <CurvedArrow
+            fromRect={fromRectMobile}
+            toRect={toRect}
+            middleY={-90}
+            fromOffsetY={-20}
+            toOffsetX={-60}
+            zIndex={99}
+            color="#FF8484"
+          />
+        </div>
       </div>
-      <Profile className={classes.showMobile} />
+      <Profile className={classes.showMobile} ref={fromRefMobile} />
     </div>
   );
 };
