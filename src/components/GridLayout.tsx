@@ -12,14 +12,14 @@ export const GridLayout = ({
 
   return (
     <>
-      <Typography variant="h4" className={classes.title}>{title}</Typography>
-      <div className={classes.projectsGrid}>{children}</div>
+      <Typography variant="h4" id={title.toLowerCase().replace(" ", "-")} className={classes.title}>{title}</Typography>
+      <div className={classes.grid}>{children}</div>
     </>
   );
 };
 
 const useStyles = makeStyles(theme => ({
-  projectsGrid: {
+  grid: {
     display: "grid",
     alignItems: "center",
     gap: theme.spacing(1),

@@ -10,12 +10,12 @@ export const Profile = forwardRef((props: any, ref: any) => {
     <Typography className={props.className} variant="h5">
       I like to build things, climb things, and throw things for{" "}
       <span ref={ref}>Sadie</span>
-      <StaticImage
+      {/* <StaticImage
         src="../images/bone.svg"
         width={50}
         quality={95}
         alt="A dog bone"
-      />
+      /> */}
     </Typography>
   );
 });
@@ -49,7 +49,7 @@ export const About = () => {
         <div style={{ display: "flex" }}>
           <div ref={toRef} style={{ alignSelf: "flex-end", marginRight: -100 }}>
             <StaticImage
-              src="../images/sadie.tiff"
+              src="../images/sadie.png"
               width={400}
               quality={95}
               alt="A Gatsby astronaut"
@@ -65,26 +65,24 @@ export const About = () => {
           </div>
         </div>
         <div className={classes.hideMobile}>
-          <CurvedArrow
+          {/* <CurvedArrow
             fromRect={fromRect}
             toRect={toRect}
             middleY={-90}
             fromOffsetY={-20}
             toOffsetX={-60}
             zIndex={99}
-            color="#FF8484"
-          />
+          /> */}
         </div>
         <div className={classes.showMobile}>
-          <CurvedArrow
+          {/* <CurvedArrow
             fromRect={fromRectMobile}
             toRect={toRect}
             middleY={-90}
             fromOffsetY={-20}
             toOffsetX={-60}
             zIndex={99}
-            color="#FF8484"
-          />
+          /> */}
         </div>
       </div>
       <Profile className={classes.showMobile} ref={fromRefMobile} />

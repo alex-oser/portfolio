@@ -1,4 +1,3 @@
-import { PageProps } from "gatsby";
 import { Layout } from "../components/layout";
 import Seo from "../components/seo";
 import { About } from "../components/about";
@@ -6,7 +5,7 @@ import { Projects } from "../components/projects/Projects";
 import { BlogPosts } from "../components/blog/BlogPosts";
 import "../styles.css"
 
-const IndexPage = (props: PageProps) => {
+const IndexPage = () => {
   return (
   <Layout>
     <Seo title="Home" />

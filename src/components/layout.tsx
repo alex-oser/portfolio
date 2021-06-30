@@ -42,7 +42,7 @@ export const Layout = ({ children }: { children: any }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 1400,
           padding: `0 1.0875rem 1.45rem`,
         }}
       >

@@ -15,6 +15,7 @@ const query = graphql`
           status
           caption
           link
+          repo
         }
       }
     }
@@ -32,6 +33,7 @@ export const Projects = () => {
           status,
           caption,
           link,
+          repo,
         } = project.frontmatter;
         return (
           <ProjectCard 
@@ -39,6 +41,7 @@ export const Projects = () => {
             title={title}
             status={status}
             caption={caption}
+            repo={repo}
             link={link}
           />
         );

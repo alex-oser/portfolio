@@ -12,7 +12,7 @@ export const Github = () => {
 
 const useStyles = makeStyles(theme => ({
   link: {
-    color: "white",
+    color: "white !important",
     textDecoration: "none",
     margin: theme.spacing(1),
   },

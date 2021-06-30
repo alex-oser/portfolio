@@ -18,13 +18,13 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
           <Github />
         </div>
         <div style={{ display: "flex", alignSelf: "center" }}>
-          <Link to="/" className={classes.link}>
+          <Link to="/#about" className={classes.link}>
             About
           </Link>
-          <Link to="/" className={classes.link}>
+          <Link to="/#projects" className={classes.link}>
             Projects
           </Link>
-          <Link to="/" className={classes.link}>
+          <Link to="/#blog" className={classes.link}>
             Blog
           </Link>
         </div>
@@ -35,7 +35,7 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
 
 const useStyles = makeStyles(theme => ({
   link: {
-    color: "white",
+    color: "white !important",
     textDecoration: "none",
     margin: theme.spacing(1),
   },

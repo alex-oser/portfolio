@@ -6,3 +6,23 @@ a.anchor {
   font-family: "Comfortaa";
   src: local("Comfortaa"), url(./fonts/Comfortaa-VariableFont_wght.ttf) format('truetype');
 }
+
+/* unvisited link */
+a:link {
+  color: paleturquoise;
+}
+
+/* visited link */
+a:visited {
+  color: hotpink;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: none;
+}
