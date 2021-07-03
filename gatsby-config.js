@@ -14,8 +14,18 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        gatsbyRemarkPlugins: [ `gatsby-remark-autolink-headers` ],
-        plugins: [ `gatsby-remark-autolink-headers` ],
+        gatsbyRemarkPlugins: [ 
+          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              disableBgImageOnAlpha: true,
+            },
+          }, 
+        ],
+        plugins: [ 
+          `gatsby-remark-autolink-headers`,
+        ],
       },
     },
     {

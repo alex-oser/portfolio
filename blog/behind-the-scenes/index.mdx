@@ -11,6 +11,7 @@ Over the past 6 months I inadvertently found myself participating in the [_12 St
 Since all the projects I have been working on use React, Gatsby was a pretty clear choice. It's static site generation, focus on SEO, and wide selection of `plugins` and `themes` have made it very popular..
 
 I started off going through the Gatsby tutorials and got a lot of inspiration from one `theme` in particular: [`gatsby-theme-portfolio`](https://github.com/smakosh/gatsby-theme-portfolio). However I quickly realized I would need to start from scratch, as this theme was missing a few crucial requirements I had:
+
 - JSX transform
 - TypeScript
 - MDX
@@ -21,6 +22,7 @@ In this post I want to walk through how I set everything up and maybe make it a 
 # Configuring Gatsby
 
 I am breaking the configuration into sections based on the configuration file you will need to update. Gatsby comes with four [config files](https://www.gatsbyjs.com/docs/reference/config-files/) of which you may only keep a few based on your needs.
+
 - `gatsby-config.js`
 - `gatsby-node.js`
 - `gatsby-browser.js`
@@ -31,6 +33,7 @@ I am breaking the configuration into sections based on the configuration file yo
 `gatsby-config.js` is where all of the plugin configurations occur, as well as where we set our site metadata. Some plugins are, as the name suggests, plug and play, whereas others can take some fiddling to get working correctly in your project.
 
 ### Sourcing posts from local file system
+
 I wanted to put my `projects` and `blog` posts in the root of the repository to logically separate them from the source code. To make Gatsby find these files and make them accessible via GraphQL, we have to use the `gatsby-source-filesystem` plugin.
 
 <CodeRenderer
@@ -54,6 +57,7 @@ I wanted to put my `projects` and `blog` posts in the root of the repository to 
 />
 
 ### Enabling MDX
+
 I also wanted to try out MDX having been inspired in large part by Josh W. Comeau's [blog](https://www.joshwcomeau.com/blog/how-i-built-my-blog/). This part took a few attempts to get right and unfortunately it seems that MDXv2 is still not fully released and integrated to Gatsby, so some of the new and improved parsing is unavailable.
 
 One feature I really wanted to include is the GitHub style Markdown link headers. Although the [documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#rehype-plugins) suggests using Rehype plugins, I could not get it to work as expected. After some digging, I found a [GitHub comment](https://github.com/gatsbyjs/gatsby/issues/15486) that led me to the below working solution.
@@ -72,10 +76,13 @@ One feature I really wanted to include is the GitHub style Markdown link headers
 />
 
 ## `gatsby-node.js`
+
 ### Enable JSX transform
+
 The "new" JSX transform from 2020 made it so that we don't have to `import React` to every jsx component. Seeing it in every file in older projects makes me 🤮, so let's avoid that.
 
 Add the below snippet to `gatsby-node.js` and you should be good to go! If not, make sure your environment is [upgraded](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#how-to-upgrade-to-the-new-jsx-transform) to support it.
+
 <CodeRenderer
   language="javascript"
   code={`
@@ -91,16 +98,18 @@ exports.onCreateBabelConfig = ({ actions }) => {
 />
 
 ### Create pages for each post
- Gatsby automatically only creates pages from the `src/pages` folder, so to do this we take advantage of Gatsby's ability to [programatically create pages](https://www.gatsbyjs.com/docs/creating-and-modifying-pages/).
 
-The code for creating pages for the `projects` and `blog` are nearly identical, so I am only showing the logic for `projects` below. 
+Gatsby automatically only creates pages from the `src/pages` folder, so to do this we take advantage of Gatsby's ability to [programatically create pages](https://www.gatsbyjs.com/docs/creating-and-modifying-pages/).
+
+The code for creating pages for the `projects` and `blog` are nearly identical, so I am only showing the logic for `projects` below.
 
 The steps in the below code are:
+
 1. Query the names of all MDX files in the `projects` directory
-1. Set `ProjectLayout` as the component that should be rendered on each page
-1. For each file found 
+2. Set `ProjectLayout` as the component that should be rendered on each page
+3. For each file found
     - get the previous and next files
-    - create a page at the path `/projects/${post.node.frontmatter.title}`
+    - create a page at the path for the post
     - The `context` passed to the created page will be accessible with the `ProjectLayout` component as input props
 
 <CodeRenderer

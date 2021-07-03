@@ -17,7 +17,7 @@ const BlogLayout = ({ pageContext }: BlogProps) => {
   const publishDate = dayjs(pageContext.date).format('MMMM DD, YYYY')
   return (
     <Layout>
-      <div style={{ padding: 8 }}>
+      <div>
         <Typography variant="h3">{pageContext.title}</Typography>
         <Typography>{publishDate}</Typography>
         <MDXRenderer>{pageContext.body}</MDXRenderer>

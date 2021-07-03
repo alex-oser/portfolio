@@ -12,8 +12,10 @@ import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme";
 import Header from "./header";
+import { makeStyles } from "@material-ui/core/styles";
 
 export const Layout = ({ children }: { children: any }) => {
+  const classes = useStyles();
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -28,12 +30,7 @@ export const Layout = ({ children }: { children: any }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 1400,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
+      <div className={classes.layout}
       >
         <main>{children}</main>
         <footer
@@ -53,3 +50,17 @@ export const Layout = ({ children }: { children: any }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+const useStyles = makeStyles(theme => ({
+  layout: {
+    margin: "auto",
+    maxWidth: 1400,
+    [theme.breakpoints.up('md')]: {
+      padding: `0 ${theme.spacing(10)}px`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(3),
+    },
+    
+  }
+}))
