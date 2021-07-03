@@ -1,13 +1,13 @@
 import { forwardRef, useRef, useEffect, useState } from "react";
-import { Typography } from "@material-ui/core";
+import { Hidden, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { StaticImage } from "gatsby-plugin-image";
 import { CurvedArrow } from "./CurvedArrow";
 import { useWindowSize } from "./hooks";
 
-export const Profile = forwardRef((props: any, ref: any) => {
+export const Profile = forwardRef((_props: any, ref: any) => {
   return (
-    <Typography className={props.className} variant="h5">
+    <Typography variant="h5">
       I like to build things, climb things, and throw things for{" "}
       <span ref={ref}>Sadie</span>
       {/* <StaticImage
@@ -44,53 +44,61 @@ export const About = () => {
       <div className={classes.flex}>
         <div className={classes.textContainer}>
           <Typography variant="h3">Hi, I'm Alex</Typography>
-          <Profile className={classes.hideMobile} ref={fromRef} />
+          <Hidden xsDown>
+            <Profile ref={fromRef} />
+          </Hidden>
         </div>
         <div style={{ display: "flex" }}>
-          <div ref={toRef} style={{ alignSelf: "flex-end", marginRight: -100 }}>
+          <div ref={toRef} style={{ alignSelf: "flex-end" }}>
             <StaticImage
               src="../images/sadie.png"
               width={400}
               quality={95}
-              alt="A Gatsby astronaut"
+              placeholder="blurred"
+              alt="sadie"
+              loading="eager"
             />
           </div>
-          <div className={classes.hideMobile}>
+          <Hidden xsDown>
             <StaticImage
-              src="../images/me.tiff"
+              src="../images/me.png"
               width={600}
               quality={95}
-              alt="A Gatsby astronaut"
+              alt="me"
+              placeholder="blurred"
+              loading="eager"
             />
-          </div>
+          </Hidden>
         </div>
-        <div className={classes.hideMobile}>
-          {/* <CurvedArrow
+        {/* <Hidden xsDown>
+          <CurvedArrow
             fromRect={fromRect}
             toRect={toRect}
             middleY={-90}
             fromOffsetY={-20}
             toOffsetX={-60}
             zIndex={99}
-          /> */}
-        </div>
-        <div className={classes.showMobile}>
-          {/* <CurvedArrow
+          />
+        </Hidden>
+        <Hidden smUp>
+          <CurvedArrow
             fromRect={fromRectMobile}
             toRect={toRect}
             middleY={-90}
             fromOffsetY={-20}
             toOffsetX={-60}
             zIndex={99}
-          /> */}
-        </div>
+          />
+        </Hidden> */}
       </div>
-      <Profile className={classes.showMobile} ref={fromRefMobile} />
+      <Hidden smUp>
+        <Profile ref={fromRefMobile} />
+      </Hidden>
     </div>
   );
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -104,17 +112,4 @@ const useStyles = makeStyles(theme => ({
   flex: {
     display: "flex",
   },
-  hideMobile: {
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
-    },
-  },
-  showMobile: {
-    [theme.breakpoints.down("xs")]: {
-      display: "block",
-    },
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-}));
+});

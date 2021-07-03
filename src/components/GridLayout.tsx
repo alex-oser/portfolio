@@ -1,5 +1,4 @@
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 
 export const GridLayout = ({
   children,

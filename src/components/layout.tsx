@@ -9,7 +9,8 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { CssBaseline } from "@material-ui/core";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { theme } from "./theme";
 import Header from "./header";
 
 export const Layout = ({ children }: { children: any }) => {
@@ -22,18 +23,6 @@ export const Layout = ({ children }: { children: any }) => {
       }
     }
   `);
-
-  const theme = createMuiTheme({
-    palette: {
-      type: 'dark',
-    },
-    typography: {
-      fontFamily: [
-        "Comfortaa",
-        "Roboto"
-      ].join(','),
-    }
-  });
 
   return (
     <ThemeProvider theme={theme}>

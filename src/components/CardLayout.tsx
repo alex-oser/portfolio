@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
-import { navigate } from 'gatsby';
+import { Link } from 'gatsby';
 
 export const CardLayout = ({
   className,
@@ -14,12 +14,13 @@ export const CardLayout = ({
 }) => {
   const classes = useStyles();
   return (
-    <Card 
-      className={clsx(classes.root, className)}
-      onClick={() => navigate(path.replace(/\s+/g, "-").toLowerCase())}
-    >
-      {children}
-    </Card>
+    <Link to={path.replace(/\s+/g, "-").toLowerCase()} className={classes.link}>
+      <Card 
+        className={clsx(classes.root, className)}
+      >
+        {children}
+      </Card>
+    </Link>
   );
 };
 
@@ -29,4 +30,7 @@ const useStyles = makeStyles(({
     height: 200,
     cursor: "pointer",
   },
+  link: {
+    textDecoration: "none",
+  }
 }));

@@ -6,6 +6,21 @@ import { Github } from "./socials/Github";
 
 const Header = ({ siteTitle }: { siteTitle: string }) => {
   const classes = useStyles();
+  // If already on the home page, scroll smoothly to section - else navigate normally
+  const handleNavigation = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    target: string
+  ) => {
+    const location = window.location.href;
+    const re = /([a-z][a-z0-9+\-.]*:(\/\/[^\/?#]+)?)?(?<path>[a-z0-9\-._~%!$&'()*+,;=:@\/]*)/;
+    const matches = location.match(re)?.groups;
+    if (!matches) return;
+    const path = matches["path"];
+    if (path === "/" || path.startsWith("/#")) {
+      e.preventDefault();
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -18,13 +33,25 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
           <Github />
         </div>
         <div style={{ display: "flex", alignSelf: "center" }}>
-          <Link to="/#about" className={classes.link}>
+          <Link
+            to="/#about"
+            className={classes.link}
+            onClick={e => handleNavigation(e, "about")}
+          >
             About
           </Link>
-          <Link to="/#projects" className={classes.link}>
+          <Link
+            to="/#projects"
+            className={classes.link}
+            onClick={e => handleNavigation(e, "projects")}
+          >
             Projects
           </Link>
-          <Link to="/#blog" className={classes.link}>
+          <Link
+            to="/#blog"
+            className={classes.link}
+            onClick={e => handleNavigation(e, "blog")}
+          >
             Blog
           </Link>
         </div>
@@ -55,7 +82,7 @@ const useStyles = makeStyles(theme => ({
   headerLeft: {
     display: "flex",
     alignItems: "center",
-  }
+  },
 }));
 
 Header.propTypes = {
