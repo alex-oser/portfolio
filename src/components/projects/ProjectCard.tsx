@@ -4,23 +4,31 @@ import { CardLayout } from "../CardLayout";
 import { ProjectStatus } from "./ProjectStatus";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LanguageIcon from "@material-ui/icons/Language";
-import { Link } from 'gatsby';
+import { Link } from "gatsby";
 
-const GitHubLink = ({ url } : { url: string }) => (
+const GitHubLink = ({ url }: { url: string }) => (
   <a
     target="_blank"
+    rel="noreferrer"
     href={url}
     onClick={e => e.stopPropagation()}
+    aria-label="GitHub repo"
   >
     <GitHubIcon color="primary" />
   </a>
 );
 
-const SiteLink = ({ url } : { url: string }) => (
-  <a target="_blank" href={url} onClick={e => e.stopPropagation()}>
+const SiteLink = ({ url }: { url: string }) => (
+  <a
+    target="_blank"
+    rel="noreferrer"
+    href={url}
+    onClick={e => e.stopPropagation()}
+    aria-label="Live site link"
+  >
     <LanguageIcon color="primary" />
   </a>
-)
+);
 
 export const ProjectCard = ({
   title,
@@ -66,5 +74,5 @@ const useStyles = makeStyles({
   },
   link: {
     textDecoration: "none",
-  }
+  },
 });

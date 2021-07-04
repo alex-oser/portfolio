@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const LinkedIn = () => {
   const classes = useStyles();
   return (
-    <a href="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link}>
+    <a href="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link} aria-label="LinkedIn profile">
       <LinkedInIcon />
     </a>
   )

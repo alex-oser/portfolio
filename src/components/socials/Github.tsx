@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const Github = () => {
   const classes = useStyles();
   return (
-    <a href="https://github.com/alex-oser" className={classes.link}>
+    <a href="https://github.com/alex-oser" className={classes.link} aria-label="GitHub profile" >
       <GitHubIcon />
     </a>
   )
