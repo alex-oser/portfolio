@@ -34,18 +34,18 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
         </div>
         <div style={{ display: "flex", alignSelf: "center" }}>
           <Link
-            to="/#about"
-            className={classes.link}
-            onClick={e => handleNavigation(e, "about")}
-          >
-            About
-          </Link>
-          <Link
             to="/#projects"
             className={classes.link}
             onClick={e => handleNavigation(e, "projects")}
           >
             Projects
+          </Link>
+          <Link
+            to="/#snippets"
+            className={classes.link}
+            onClick={e => handleNavigation(e, "snippets")}
+          >
+            Snippets
           </Link>
           <Link
             to="/#blog"

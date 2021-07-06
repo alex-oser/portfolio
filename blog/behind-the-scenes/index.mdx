@@ -5,6 +5,7 @@ caption: How I made this website
 ---
 
 import { CodeRenderer } from "../../src/components/CodeRenderer";
+import { fileConfig, mdxConfig, babelConfig, pageConfig } from "./code";
 
 Over the past 6 months I inadvertently found myself participating in the [_12 Startups in 12 Months Challenge_](https://www.indiehackers.com/group/12-startups-in-12-months). Most of these "startups" have just been small projects, but they taught me a lot. In an effort to document and help myself learn even more from each of them, this month's project is this website. My personal _blogfolio_.
 
@@ -36,25 +37,9 @@ I am breaking the configuration into sections based on the configuration file yo
 
 I wanted to put my `projects` and `blog` posts in the root of the repository to logically separate them from the source code. To make Gatsby find these files and make them accessible via GraphQL, we have to use the `gatsby-source-filesystem` plugin.
 
-<CodeRenderer
-  language="javascript"
-  code={`
-{
-  resolve: \`gatsby-source-filesystem\`,
-  options: {
-    path: \`\${__dirname}/blog\`,
-    name: "blog",
-  },
-},
-{
-  resolve: \`gatsby-source-filesystem\`,
-  options: {
-    path: \`\${__dirname}/projects\`,
-    name: "projects",
-  },
-},
-`}
-/>
+<CodeRenderer language="javascript" >
+  {fileConfig}
+</CodeRenderer>
 
 ### Enabling MDX
 
@@ -62,18 +47,9 @@ I also wanted to try out MDX having been inspired in large part by Josh W. Comea
 
 One feature I really wanted to include is the GitHub style Markdown link headers. Although the [documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#rehype-plugins) suggests using Rehype plugins, I could not get it to work as expected. After some digging, I found a [GitHub comment](https://github.com/gatsbyjs/gatsby/issues/15486) that led me to the below working solution.
 
-<CodeRenderer
-  language="javascript"
-  code={`
-{
-  resolve: \`gatsby-plugin-mdx\`,
-  options: {
-    gatsbyRemarkPlugins: [ \`gatsby-remark-autolink-headers\` ],
-    plugins: [ \`gatsby-remark-autolink-headers\` ],
-  },
-},
-`}
-/>
+<CodeRenderer language="javascript" >
+  {mdxConfig}
+</CodeRenderer>
 
 ## `gatsby-node.js`
 
@@ -83,19 +59,9 @@ The "new" JSX transform from 2020 made it so that we don't have to `import React
 
 Add the below snippet to `gatsby-node.js` and you should be good to go! If not, make sure your environment is [upgraded](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#how-to-upgrade-to-the-new-jsx-transform) to support it.
 
-<CodeRenderer
-  language="javascript"
-  code={`
-exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPlugin({
-    name: '@babel/plugin-transform-react-jsx',
-    options: {
-      runtime: 'automatic'
-    }
-  })
-}
-`}
-/>
+<CodeRenderer language="javascript" >
+  {babelConfig}
+</CodeRenderer>
 
 ### Create pages for each post
 
@@ -112,60 +78,9 @@ The steps in the below code are:
     - create a page at the path for the post
     - The `context` passed to the created page will be accessible with the `ProjectLayout` component as input props
 
-<CodeRenderer
-  language="javascript"
-  code={`
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions;
-  // Reusable function to find MDX files in the /projects or /blog path
-  const getMdxData = async (type) => {
-    return graphql(\`
-      {
-        allMdx(
-          filter: {fileAbsolutePath: {regex: "/\${type}/"}}
-          sort: {fields: [frontmatter___title], order: DESC}
-        ) {
-          edges {
-            node {
-              frontmatter {
-                title
-              }
-              body
-            }
-          }
-        }
-      }
-    \`)
-  }
-  const projectsData = await getMdxData("projects");
-  // Handle errors
-  if (projectsData.errors) {
-    reporter.panicOnBuild("Error while running GraphQL query for MDX data.")
-    return
-  }
-  const ProjectLayout = path.resolve("src/components/projects/ProjectLayout.tsx");
-  // Create project pages.
-  const projects = projectsData.data.allMdx.edges;
-  projects.forEach((post, index) => {
-    const previous =
-      index === projects.length - 1
-        ? null
-        : projects[index + 1].node;
-    const next = index === 0 ? null : projects[index - 1].node;
-    createPage({
-      path: \`/projects/\${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}\`,
-      component: ProjectLayout,
-      context: {
-        title: post.node.frontmatter.title,
-        body: post.node.body,
-        previous,
-        next,
-      },
-    });
-  });
-};
-`}
-/>
+<CodeRenderer language="javascript" >
+  {pageConfig}
+</CodeRenderer>
 
 # Configuring routes
 

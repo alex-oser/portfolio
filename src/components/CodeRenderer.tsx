@@ -2,10 +2,10 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwl";
 import { makeStyles } from "@material-ui/core/styles";
 
-export const CodeRenderer = ({language, code} : {language: any, code: string}) => {
+export const CodeRenderer = ({language, children} : {language: any, children: string}) => {
   const classes = useStyles();
   // Remove beginning and end new line, helps to pass in code like this though
-  const trimmed=code.replace(/^(\s)+|(\s)+$/g,"");
+  const trimmed=children.replace(/^(\s)+|(\s)+$/g,"");
   return (
     <Highlight {...defaultProps} theme={theme} code={trimmed} language={language}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
