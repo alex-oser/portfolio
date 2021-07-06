@@ -31,5 +31,6 @@ export const SnippetCard = ({
 const useStyles = makeStyles(theme => ({
   link: {
     textDecoration: "none",
+    height: "100%",
   },
 }));

@@ -31,5 +31,6 @@ export const BlogCard = ({
 const useStyles = makeStyles(theme => ({
   link: {
     textDecoration: "none",
+    height: "100%",
   },
 }));

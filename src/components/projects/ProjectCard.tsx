@@ -74,5 +74,6 @@ const useStyles = makeStyles({
   },
   link: {
     textDecoration: "none",
+    height: "100%",
   },
 });
