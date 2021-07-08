@@ -15,7 +15,7 @@ const query = graphql`
           status
           caption
           link
-          repo
+          repo          
         }
       }
     }
@@ -28,21 +28,10 @@ export const Projects = () => {
   return (
     <GridLayout title={"Projects"}>
       {projects.map((project: any) => {
-        const { 
-          title,
-          status,
-          caption,
-          link,
-          repo,
-        } = project.frontmatter;
         return (
           <ProjectCard 
             key={project.frontmatter.title} 
-            title={title}
-            status={status}
-            caption={caption}
-            repo={repo}
-            link={link}
+            frontmatter={project.frontmatter}
           />
         );
       })}

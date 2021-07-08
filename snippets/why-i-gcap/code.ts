@@ -1,4 +1,5 @@
 export const gcap = `
+# ex. gcap "I love gcap"
 function gcap {
   git add -A
   git commit -m "$@"

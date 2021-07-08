@@ -6,13 +6,15 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LanguageIcon from "@material-ui/icons/Language";
 import { Link } from "gatsby";
 
+const linkStyle = { display: "flex " };
 const GitHubLink = ({ url }: { url: string }) => (
   <a
     target="_blank"
-    rel="noreferrer"
+    rel="noopener"
     href={url}
     onClick={e => e.stopPropagation()}
     aria-label="GitHub repo"
+    style={linkStyle}
   >
     <GitHubIcon color="primary" />
   </a>
@@ -21,28 +23,24 @@ const GitHubLink = ({ url }: { url: string }) => (
 const SiteLink = ({ url }: { url: string }) => (
   <a
     target="_blank"
-    rel="noreferrer"
+    rel="noopener"
     href={url}
     onClick={e => e.stopPropagation()}
     aria-label="Live site link"
+    style={linkStyle}
   >
     <LanguageIcon color="primary" />
   </a>
 );
 
-export const ProjectCard = ({
-  title,
-  status,
-  caption,
-  link,
-  repo,
-}: {
-  title: string;
-  status: string;
-  caption: string;
-  link: string;
-  repo: string;
-}) => {
+export const ProjectCard = ({ frontmatter } : any) => {
+  const {
+    title,
+    status,
+    caption,
+    link,
+    repo,
+  } = frontmatter;
   const classes = useStyles();
   const path = `projects/${title.replace(/\s+/g, "-").toLowerCase()}`;
   return (
@@ -75,5 +73,8 @@ const useStyles = makeStyles({
   link: {
     textDecoration: "none",
     height: "100%",
+  },
+  icon: {
+    alignItems: "center",
   },
 });

@@ -7,6 +7,14 @@ caption: For when the coffee shop only gives you 2 hours of WiFi
 import { CodeRenderer } from "../../src/components/CodeRenderer";
 import { mac } from "./code";
 
+Although your physical MAC address comes from your hardware, sometimes you might find yourself wanting to spoof it. This could be for privacy reasons, or it could be because a coffee shop you really like decided that it would be a good idea to limit WiFi access to 2-hour sessions. Either way, the below function works nicely for me on my MacBook Pro running the latest OS (Big Sur). 
+
+I couldn't find anyone to explain *why* we have to keep the first 3 octets of the original MAC address, but from testing with a completely random address it only seemed to work about half the time.
+
+After running the command, make sure to disconnect and reconnect to the WiFi and you should be good to go. 
+
+Since the MAC address is actually tied to your machine, restarting will reset it back to normal.
+
 <CodeRenderer language="shell">
   {mac}
 </CodeRenderer>

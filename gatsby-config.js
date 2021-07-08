@@ -31,9 +31,12 @@ module.exports = {
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map(edge => {
+                const path = edge.node.fileAbsolutePath.split("/")
+                const indexOfSlug = path.indexOf(edge.node.slug.replace("/",""));
+                const parent = path[indexOfSlug - 1];
                 return Object.assign({}, edge.node.frontmatter, {
-                  url: site.siteMetadata.siteUrl + "/" + edge.node.slug,
-                  guid: site.siteMetadata.siteUrl + "/" + edge.node.slug,
+                  url: site.siteMetadata.siteUrl + `/${parent}/` + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + `/${parent}/` + edge.node.slug,
                   custom_elements: [{ 'content:encoded': edge.node.html }],
                 });
               });
@@ -48,6 +51,7 @@ module.exports = {
                     }
                     html
                     slug
+                    fileAbsolutePath
                   }
                 }
               }
