@@ -6,7 +6,7 @@ const query = graphql`
   {
     allMdx(
       filter: {fileAbsolutePath: {regex: "/projects/"}}
-      sort: {fields: [frontmatter___title], order: DESC}
+      sort: {fields: [frontmatter___date], order: DESC}
     ) {
       nodes {
         slug
@@ -15,7 +15,8 @@ const query = graphql`
           status
           caption
           link
-          repo          
+          repo
+          date          
         }
       }
     }
