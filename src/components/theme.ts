@@ -34,7 +34,7 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: [
-      "Comfortaa",
+      "Raleway",
       "Roboto"
     ].join(','),
   }

@@ -3,9 +3,19 @@ a.anchor {
 }
 
 @font-face {
-  font-family: "Comfortaa";
-  font-weight: 100 700;
-  src: local("Comfortaa"), url(./fonts/Comfortaa-VariableFont_wght.ttf) format('truetype');
+  font-family: "Raleway";
+  font-weight: 200 900;
+  font-style: normal;
+  src: url(./fonts/Raleway-VariableFont_wght.ttf) format('truetype');
+  /* src: url(./fonts/Raleway-Italic-VariableFont_wght.ttf) format('truetype'); */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-weight: 200 900;
+  font-style: italic;
+  src: url(./fonts/Raleway-Italic-VariableFont_wght.ttf) format('truetype');
   font-display: swap;
 }
 
