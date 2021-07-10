@@ -14,7 +14,7 @@ const ProjectLayout = ({ pageContext }: ProjectProps) => {
   return (
     <Layout>
       <div>
-        <Typography variant="h3">{pageContext.title}</Typography>
+        <Typography variant="h4">{pageContext.title}</Typography>
         <MDXRenderer>{pageContext.body}</MDXRenderer>
       </div>
     </Layout>

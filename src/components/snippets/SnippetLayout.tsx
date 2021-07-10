@@ -18,7 +18,7 @@ const SnippetLayout = ({ pageContext }: SnippetsProps) => {
   return (
     <Layout>
       <div>
-        <Typography variant="h3">{pageContext.title}</Typography>
+        <Typography variant="h4">{pageContext.title}</Typography>
         <Typography>{publishDate}</Typography>
         <MDXRenderer>{pageContext.body}</MDXRenderer>
       </div>

@@ -3,7 +3,7 @@ import Seo from "../components/seo";
 import { About } from "../components/about";
 import { Projects } from "../components/projects/Projects";
 import { Snippets } from "../components/snippets/Snippets";
-import { BlogPosts } from "../components/blog/BlogPosts";
+// import { BlogPosts } from "../components/blog/BlogPosts";
 import "../styles.css"
 
 const IndexPage = () => {
@@ -13,7 +13,7 @@ const IndexPage = () => {
     <About />
     <Projects />
     <Snippets />
-    <BlogPosts />
+    {/* <BlogPosts /> */}
   </Layout>
 )};
 
