@@ -47,13 +47,13 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
           >
             Snippets
           </Link>
-          <Link
+          {/* <Link
             to="/#blog"
             className={classes.link}
             onClick={e => handleNavigation(e, "blog")}
           >
             Blog
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

@@ -95,27 +95,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     });
   });
   
-  // Create blog pages.
-  const blogPosts = blogData.data.allMdx.edges;
-  blogPosts.forEach((post, index) => {
-    const previous =
-      index === blogPosts.length - 1
-        ? null
-        : blogPosts[index + 1].node;
-    const next = index === 0 ? null : blogPosts[index - 1].node;
+  // // Create blog pages.
+  // const blogPosts = blogData.data.allMdx.edges;
+  // blogPosts.forEach((post, index) => {
+  //   const previous =
+  //     index === blogPosts.length - 1
+  //       ? null
+  //       : blogPosts[index + 1].node;
+  //   const next = index === 0 ? null : blogPosts[index - 1].node;
 
-    createPage({
-      path: `/blog/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
-      component: BlogLayout,
-      context: {
-        title: post.node.frontmatter.title,
-        body: post.node.body,
-        date: post.node.frontmatter.date,
-        previous,
-        next,
-      },
-    });
-  });
+  //   createPage({
+  //     path: `/blog/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
+  //     component: BlogLayout,
+  //     context: {
+  //       title: post.node.frontmatter.title,
+  //       body: post.node.body,
+  //       date: post.node.frontmatter.date,
+  //       previous,
+  //       next,
+  //     },
+  //   });
+  // });
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {
