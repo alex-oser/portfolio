@@ -1,6 +1,6 @@
 ---
 title: portfolio
-status: in progress
+status: live
 caption: A jumping off point to see everything I do
 link: https://alexoser.com
 repo: https://github.com/alex-oser/portfolio
@@ -8,11 +8,11 @@ date: 2021-07-09
 ---
 
 import { CodeRenderer } from "../../src/components/CodeRenderer";
-import { fileConfig, mdxConfig, babelConfig, pageConfig } from "./code";
+import { fileConfig, mdxConfig, babelConfig, pageConfig, rssConfig } from "./code";
 
 Over the past 6 months I inadvertently found myself participating in the [_12 Startups in 12 Months Challenge_](https://www.indiehackers.com/group/12-startups-in-12-months). Most of these "startups" have just been small projects, but they taught me a lot. In an effort to document and help myself learn even more from each of them, this month's project is this website. My personal _blogfolio_.
 
-Since all the projects I have been working on use React, Gatsby was a pretty clear choice. It's static site generation, focus on SEO, and wide selection of `plugins` and `themes` have made it very popular..
+Gatsby's static site generation, focus on SEO, and wide selection of `plugins` and `themes` made it a clear choice for building out this project.
 
 I started off going through the Gatsby tutorials and got a lot of inspiration from one `theme` in particular: [`gatsby-theme-portfolio`](https://github.com/smakosh/gatsby-theme-portfolio). However I quickly realized I would need to start from scratch, as this theme was missing a few crucial requirements I had:
 
@@ -25,7 +25,7 @@ In this post I want to walk through how I set everything up and maybe make it a 
 
 # Configuring Gatsby
 
-I am breaking the configuration into sections based on the configuration file you will need to update. Gatsby comes with four [config files](https://www.gatsbyjs.com/docs/reference/config-files/) of which you may only keep a few based on your needs.
+I am breaking the configuration into sections based on the configuration files you will need to update. Gatsby comes with four [config files](https://www.gatsbyjs.com/docs/reference/config-files/) of which you may only keep a few based on your needs.
 
 - `gatsby-config.js`
 - `gatsby-node.js`
@@ -34,11 +34,11 @@ I am breaking the configuration into sections based on the configuration file yo
 
 ## `gatsby-config.js`
 
-`gatsby-config.js` is where all of the plugin configurations occur, as well as where we set our site metadata. Some plugins are, as the name suggests, plug and play, whereas others can take some fiddling to get working correctly in your project.
+`gatsby-config.js` is where most of the plugin configurations occur, as well as where we set our site metadata. Some plugins are, as the name suggests, plug and play, whereas others can take some fiddling to get working correctly in your project.
 
 ### Sourcing posts from local file system
 
-I wanted to put my `projects` and `blog` posts in the root of the repository to logically separate them from the source code. To make Gatsby find these files and make them accessible via GraphQL, we have to use the `gatsby-source-filesystem` plugin.
+I wanted to put my `projects`, `snippets` and `blog` posts in the root of the repository to logically separate them from the source code. To make Gatsby find these files and make them accessible via GraphQL, we have to use the `gatsby-source-filesystem` plugin.
 
 <CodeRenderer language="javascript" >
   {fileConfig}
@@ -46,7 +46,7 @@ I wanted to put my `projects` and `blog` posts in the root of the repository to 
 
 ### Enabling MDX
 
-I also wanted to try out MDX having been inspired in large part by Josh W. Comeau's [blog](https://www.joshwcomeau.com/blog/how-i-built-my-blog/). This part took a few attempts to get right and unfortunately it seems that MDXv2 is still not fully released and integrated to Gatsby, so some of the new and improved parsing is unavailable.
+I also wanted to try out MDX having been inspired in large part by Josh W. Comeau's [blog](https://www.joshwcomeau.com/blog/how-i-built-my-blog/). This part took a few attempts to get right and unfortunately at the time of writing MDXv2 is still not fully released and integrated to Gatsby, so some of the new and improved parsing is unavailable.
 
 One feature I really wanted to include is the GitHub style Markdown link headers. Although the [documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#rehype-plugins) suggests using Rehype plugins, I could not get it to work as expected. After some digging, I found a [GitHub comment](https://github.com/gatsbyjs/gatsby/issues/15486) that led me to the below working solution.
 
@@ -68,9 +68,9 @@ Add the below snippet to `gatsby-node.js` and you should be good to go! If not, 
 
 ### Create pages for each post
 
-Gatsby automatically only creates pages from the `src/pages` folder, so to do this we take advantage of Gatsby's ability to [programatically create pages](https://www.gatsbyjs.com/docs/creating-and-modifying-pages/).
+Gatsby automatically only creates pages from the `src/pages` folder, so to create pages for every blog, project and snippet post we take advantage of Gatsby's ability to [programatically create pages](https://www.gatsbyjs.com/docs/creating-and-modifying-pages/).
 
-The code for creating pages for the `projects` and `blog` are nearly identical, so I am only showing the logic for `projects` below.
+The code for creating pages for each section is nearly identical, so I am only showing the logic for `projects` below.
 
 The steps in the below code are:
 
@@ -85,6 +85,9 @@ The steps in the below code are:
   {pageConfig}
 </CodeRenderer>
 
-# Configuring routes
+# RSS Feed
+Finally, I found myself wanting to create an RSS feed for the site. Although I had not used an RSS reader before, building this site and seeing other Gatsby creators using them helped me realize just how useful they can be. Configuring Gatsby to work with MDX and RSS required the last bit of configuration before I could fully begin focusing creating content.
 
-# Actually writing
+<CodeRenderer language="javascript">
+  {rssConfig}
+</CodeRenderer>

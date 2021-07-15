@@ -87,3 +87,55 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   });
 };
 `
+
+export const rssConfig = `{
+  resolve: \`gatsby-plugin-feed\`,
+  options: {
+    query: \`
+      {
+        site {
+          siteMetadata {
+            title
+            description
+            siteUrl
+            site_url: siteUrl
+          }
+        }
+      }
+    \`,
+    feeds: [
+      {
+        serialize: ({ query: { site, allMdx } }) => {
+          return allMdx.edges.map(edge => {
+            const path = edge.node.fileAbsolutePath.split("/")
+            const indexOfSlug = path.indexOf(edge.node.slug.replace("/",""));
+            const parent = path[indexOfSlug - 1];
+            return Object.assign({}, edge.node.frontmatter, {
+              url: site.siteMetadata.siteUrl + \`/\${parent}/\` + edge.node.slug,
+              guid: site.siteMetadata.siteUrl + \`/\${parent}/\` + edge.node.slug,
+              custom_elements: [{ 'content:encoded': edge.node.html }],
+            });
+          });
+        },
+        query: \`
+        {
+          allMdx(limit: 1000) {
+            edges {
+              node {
+                frontmatter {
+                  title
+                }
+                html
+                slug
+                fileAbsolutePath
+              }
+            }
+          }
+        }
+        \`,
+        output: '/rss.xml',
+        title: \`alexoser.com RSS Feed\`,
+      },
+    ],
+  },
+},`;
