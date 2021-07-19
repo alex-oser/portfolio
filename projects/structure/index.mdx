@@ -1,17 +1,20 @@
 ---
-title: structure
+title: Structure
 status: in progress
 caption: An interactive design tool for developers to structure their code
-repo: https://github.com/alex-oser/structure
+repo: https://github.com/structure-codes
 link: https://structure.codes
 date: 2021-07-06
 ---
 
 import { StaticImage } from "gatsby-plugin-image";
+import { CodeRenderer } from "../../src/components/CodeRenderer";
+import { tree } from "./code";
 
 Structure is an interactive design tool made for developers to help answer one question they have all asked before:
 > *How should I structure my code?*
 
+## Overview 
 Any research on this topic quickly reveals that there is not one decisive answer.
 
 There are however a plethora of blogs, podcasts, and repository templates demonstrating examples of how experienced developers and organizations choose to structure their projects. Despite this abundance of information, with no consolidated resource to compare or view them, it can still feel hard to get started and make the right choice. 
@@ -19,3 +22,38 @@ There are however a plethora of blogs, podcasts, and repository templates demons
 Structure aims to help developers rapidly prototype their code and pick the structure that will work the best for them. It can also help to build the mental model of a project that enables a great developer experience.
 
 Most importantly, Structure relies on input from the community to add high quality templates for projects of all languages and frameworks.
+
+Structure provides an E2E set of tools for designing repository structure which are all in the [Structure GitHub organization](https://github.com/structure-codes).
+
+  1. [Website](/projects/structure#the-website)
+  1. [Templates repository](/projects/structure#templates-repository)
+  1. [VSCode language](/projects/structure#vscode-language)
+  1. [CLI tool](/projects/structure#cli-tool)
+
+The central feature is using the `tree` language to represent directory structures exemplified by the code below.
+
+<CodeRenderer>
+	{tree}
+</CodeRenderer>
+
+## The website
+The website is the primary tool for users to interact with and provides an intuitive way to view the folder hierarchy in any project. Here you can pull in the structure from any public GitHub repository or use one of the custom built templates that has been designed for Structure.
+
+## Templates repository
+The templates repositoty is separate from the rest of the code to simplify the process of allowing contributions from the community. It has specific guidelines for how templates should be formatted which are enforced by the repository's GitHub actions. Upon commit a GitHub action is also configured which parses any template changes to generate the [`templates.json`](https://github.com/structure-codes/templates/blob/main/templates.json) file which is used by the main website to list all available templates.
+
+Templates can have tags to help users find them, these are denoted by lines at the beginning of the `tree` file which start with a `#`. It is recommended that one of these tags be a link to the repository that the template is based off of.
+
+## VSCode Language
+The VSCode language extension makes the `tree` language real by enabling code highlighting, folding, and error checking within the editor.
+
+## CLI tool
+The CLI tool helps take the structure from the web to the filesystem by converting any `tree` file to a directory structure on the local file system.
+
+## Other resources
+Along the way a lot of other resources helped inspire and guide this project, these are listed below:
+- https://www.robinwieruch.de/react-folder-structure
+- https://github.com/react-boilerplate/react-boilerplate
+- https://www.freecodecamp.org/news/a-better-way-to-structure-react-projects/
+- https://devchat.tv/react-round-up/how-to-structure-your-react-projects-rru-141/?utm_campaign=06-03-21+-+Check+out+this&utm_source=Message&utm_medium=Twitter
+- https://github.com/Rich-Harris/degit
