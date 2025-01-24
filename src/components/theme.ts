@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
-declare module '@material-ui/core/styles/createMuiTheme' {
+declare module '@mui/material/styles/createMuiTheme' {
   interface Theme {
     status: {
       dead: React.CSSProperties['color'],
@@ -9,7 +9,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       live: React.CSSProperties['color'],
     }
   }
-  interface ThemeOptions {
+  interface DeprecatedThemeOptions {
     status: {
       dead: React.CSSProperties['color'],
       inprogress: React.CSSProperties['color'],
@@ -19,7 +19,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   }
 }
 
-export const theme = createMuiTheme({
+export const theme = createTheme(adaptV4Theme({
   status: {
     dead: "#ff4a4a",
     inprogress: "#6573c3",
@@ -27,7 +27,10 @@ export const theme = createMuiTheme({
     live: "#579f57",
   },
   palette: {
-    type: 'dark',
+    mode: 'dark',
+    background: {
+      default: "#383636"
+    },
     primary: {
       main: "#bac4ff",
     }
@@ -38,4 +41,4 @@ export const theme = createMuiTheme({
       "Roboto"
     ].join(','),
   }
-});
+}));

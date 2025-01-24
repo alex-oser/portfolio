@@ -1,7 +1,7 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 interface ProjectProps extends PageProps {
   pageContext: {

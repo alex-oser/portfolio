@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useEffect, useState } from "react";
-import { Hidden, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Hidden, Typography } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { StaticImage } from "gatsby-plugin-image";
 import { CurvedArrow } from "./CurvedArrow";
 import { useWindowSize } from "./hooks";
@@ -40,11 +40,11 @@ export const About = () => {
   }, [windowSize]);
 
   return (
-    <div className={classes.root}>
+    (<div className={classes.root}>
       <div className={classes.flex}>
         <div className={classes.textContainer}>
           <Typography variant="h3">Hi, I'm Alex</Typography>
-          <Hidden xsDown>
+          <Hidden smDown>
             <Profile ref={fromRef} />
           </Hidden>
         </div>
@@ -59,7 +59,7 @@ export const About = () => {
               loading="eager"
             />
           </div>
-          <Hidden xsDown>
+          <Hidden smDown>
             <StaticImage
               src="../images/me.png"
               width={600}
@@ -94,7 +94,7 @@ export const About = () => {
       <Hidden smUp>
         <Profile ref={fromRefMobile} />
       </Hidden>
-    </div>
+    </div>)
   );
 };
 

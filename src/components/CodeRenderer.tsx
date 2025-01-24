@@ -1,6 +1,6 @@
 import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwl";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
 export const CodeRenderer = ({language, children} : {language: any, children: string}) => {
   const classes = useStyles();

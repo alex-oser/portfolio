@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { LinkedIn } from "./socials/LinkedIn";
 import { Github } from "./socials/Github";
 

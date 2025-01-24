@@ -8,10 +8,18 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
-import { CssBaseline } from "@material-ui/core";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { theme } from "./theme";
 import Header from "./header";
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 export const Layout = ({ children }: { children: any }) => {
   const data = useStaticQuery(graphql`
@@ -25,11 +33,13 @@ export const Layout = ({ children }: { children: any }) => {
   `);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <LayoutWrapper>{children}</LayoutWrapper>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 
@@ -60,9 +70,9 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     maxWidth: 1400,
     [theme.breakpoints.up("md")]: {
-      padding: `0 ${theme.spacing(10)}px`,
+      padding: `0 ${theme.spacing(10)}`,
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(3),
     },
   },

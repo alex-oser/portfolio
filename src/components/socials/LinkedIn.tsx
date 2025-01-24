@@ -1,5 +1,5 @@
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import { makeStyles } from "@material-ui/core/styles";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import makeStyles from '@mui/styles/makeStyles';
 
 export const LinkedIn = () => {
   const classes = useStyles();

@@ -1,5 +1,5 @@
-import GitHubIcon from '@material-ui/icons/GitHub';
-import { makeStyles } from "@material-ui/core/styles";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import makeStyles from '@mui/styles/makeStyles';
 
 export const Github = () => {
   const classes = useStyles();

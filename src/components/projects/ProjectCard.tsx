@@ -1,9 +1,9 @@
-import { CardContent, CardActions, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { CardContent, CardActions, Typography } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { CardLayout } from "../CardLayout";
 import { ProjectStatus } from "./ProjectStatus";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import LanguageIcon from "@material-ui/icons/Language";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LanguageIcon from "@mui/icons-material/Language";
 import { Link } from "gatsby";
 
 const linkStyle = { display: "flex " };
