@@ -9,13 +9,11 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme";
 import Header from "./header";
-import { makeStyles } from "@material-ui/core/styles";
 
 export const Layout = ({ children }: { children: any }) => {
-  const classes = useStyles();
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -30,20 +28,26 @@ export const Layout = ({ children }: { children: any }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div className={classes.layout}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <LayoutWrapper>{children}</LayoutWrapper>
     </ThemeProvider>
+  );
+};
+
+const LayoutWrapper = ({ children }: { children: any }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.layout}>
+      <main>{children}</main>
+      <footer
+        style={{
+          marginTop: `2rem`,
+        }}
+      >
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+      </footer>
+    </div>
   );
 };
 
@@ -55,12 +59,11 @@ const useStyles = makeStyles(theme => ({
   layout: {
     margin: "auto",
     maxWidth: 1400,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       padding: `0 ${theme.spacing(10)}px`,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(3),
     },
-    
-  }
-}))
+  },
+}));
