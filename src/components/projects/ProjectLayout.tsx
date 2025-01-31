@@ -1,6 +1,5 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
 import { Typography } from "@mui/material";
 
 interface ProjectProps extends PageProps {
@@ -14,7 +13,7 @@ const ProjectLayout = ({ pageContext, children }: ProjectProps) => {
     <Layout>
       <div>
         <Typography variant="h4">{pageContext.title}</Typography>
-        <MDXProvider>{children}</MDXProvider>
+        {children}
       </div>
     </Layout>
   )

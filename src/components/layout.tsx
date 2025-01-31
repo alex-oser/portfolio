@@ -9,17 +9,19 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from "@mui/material/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import { theme } from "./theme";
 import Header from "./header";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
-
 
 export const Layout = ({ children }: { children: any }) => {
   const data = useStaticQuery(graphql`
@@ -72,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       padding: `0 ${theme.spacing(10)}`,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down("md")]: {
       padding: theme.spacing(3),
     },
   },

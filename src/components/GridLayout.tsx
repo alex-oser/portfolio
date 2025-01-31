@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 export const GridLayout = ({
   children,
@@ -13,7 +13,13 @@ export const GridLayout = ({
 
   return (
     <>
-      <Typography variant="h4" id={title.toLowerCase().replace(" ", "-")} className={classes.title}>{title}</Typography>
+      <Typography
+        variant="h4"
+        id={title.toLowerCase().replace(" ", "-")}
+        className={classes.title}
+      >
+        {title}
+      </Typography>
       <div className={classes.grid}>{children}</div>
     </>
   );
@@ -26,14 +32,14 @@ const useStyles = makeStyles(theme => ({
     gap: theme.spacing(1),
     marginBottom: theme.spacing(2),
     gridTemplateColumns: "repeat(3, 1fr)",
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("md")]: {
       gridTemplateColumns: "repeat(2, 1fr)",
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down("sm")]: {
       gridTemplateColumns: "repeat(1, 1fr)",
     },
   },
   title: {
     marginBottom: theme.spacing(1),
-  }
+  },
 }));
