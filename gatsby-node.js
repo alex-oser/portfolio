@@ -21,11 +21,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       `
         {
           allMdx(
-            filter: {fileAbsolutePath: {regex: "/${type}/"}}
+            filter: {internal: {contentFilePath: {regex: "/${type}/"}}}
             sort: {fields: [frontmatter___title], order: DESC}
           ) {
             edges {
               node {
+                internal {
+                  contentFilePath
+                }
                 frontmatter {
                   title
                   date
@@ -62,9 +65,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         : projects[index + 1].node;
     const next = index === 0 ? null : projects[index - 1].node;
 
+    const pageName = (post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase();
+
     createPage({
-      path: `/projects/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
-      component: ProjectLayout,
+      path: `/projects/${pageName}`,
+      component: `${ProjectLayout}?__contentFilePath=${post.node.internal.contentFilePath}`,
       context: {
         title: post.node.frontmatter.title,
         body: post.node.body,
@@ -83,9 +88,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         : snippets[index + 1].node;
     const next = index === 0 ? null : snippets[index - 1].node;
 
+    const pageName = (post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase();
+
     createPage({
-      path: `/snippets/${(post.node.frontmatter.title).replace(/\s+/g, '-').toLowerCase()}`,
-      component: SnippetLayout,
+      path: `/snippets/${pageName}`,
+      component: `${SnippetLayout}?__contentFilePath=${post.node.internal.contentFilePath}`,
       context: {
         title: post.node.frontmatter.title,
         body: post.node.body,

@@ -5,10 +5,9 @@ import { graphql, useStaticQuery } from "gatsby";
 const query = graphql`
   {
     allMdx(
-      filter: {fileAbsolutePath: {regex: "/snippets/"}}
+      filter: { internal: {contentFilePath: {regex: "/snippets/"}}}
     ) {
       nodes {
-        slug
         frontmatter {
           title
           caption

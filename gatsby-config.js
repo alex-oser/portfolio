@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://alexoser.com`,
   },
   plugins: [
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
@@ -31,12 +32,10 @@ module.exports = {
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map(edge => {
-                const path = edge.node.fileAbsolutePath.split("/")
-                const indexOfSlug = path.indexOf(edge.node.slug.replace("/",""));
-                const parent = path[indexOfSlug - 1];
+                const path = edge.node.internal.contentFilePath.split("/")
                 return Object.assign({}, edge.node.frontmatter, {
-                  url: site.siteMetadata.siteUrl + `/${parent}/` + edge.node.slug,
-                  guid: site.siteMetadata.siteUrl + `/${parent}/` + edge.node.slug,
+                  url: site.siteMetadata.siteUrl + path,
+                  guid: site.siteMetadata.siteUrl + path,
                   custom_elements: [{ 'content:encoded': edge.node.html }],
                 });
               });
@@ -46,12 +45,12 @@ module.exports = {
               allMdx(limit: 1000) {
                 edges {
                   node {
+                    internal {
+                      contentFilePath
+                    }
                     frontmatter {
                       title
                     }
-                    html
-                    slug
-                    fileAbsolutePath
                   }
                 }
               }
@@ -80,9 +79,6 @@ module.exports = {
               ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
             },
           },
-        ],
-        plugins: [ 
-          `gatsby-remark-autolink-headers`,
         ],
       },
     },

@@ -1,7 +1,6 @@
 import { Layout } from "../layout";
 import { PageProps } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import dayjs from "dayjs"
 
 interface SnippetsProps extends PageProps {
@@ -12,7 +11,7 @@ interface SnippetsProps extends PageProps {
   };
 }
 
-const SnippetLayout = ({ pageContext }: SnippetsProps) => {
+const SnippetLayout = ({ pageContext, children }: SnippetsProps) => {
   console.log(pageContext);
   const publishDate = dayjs(pageContext.date).format('MMMM DD, YYYY')
   return (
@@ -20,7 +19,7 @@ const SnippetLayout = ({ pageContext }: SnippetsProps) => {
       <div>
         <Typography variant="h4">{pageContext.title}</Typography>
         <Typography>{publishDate}</Typography>
-        <MDXRenderer>{pageContext.body}</MDXRenderer>
+        {children}
       </div>
     </Layout>
   );
