@@ -1,15 +1,7 @@
-import { createTheme, adaptV4Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
-declare module '@mui/material/styles/createMuiTheme' {
-  interface Theme {
-    status: {
-      dead: React.CSSProperties['color'],
-      inprogress: React.CSSProperties['color'],
-      idea: React.CSSProperties['color'],
-      live: React.CSSProperties['color'],
-    }
-  }
-  interface DeprecatedThemeOptions {
+declare module '@mui/material/styles/createTheme' {
+  interface ThemeOptions {
     status: {
       dead: React.CSSProperties['color'],
       inprogress: React.CSSProperties['color'],
@@ -19,13 +11,7 @@ declare module '@mui/material/styles/createMuiTheme' {
   }
 }
 
-export const theme = createTheme(adaptV4Theme({
-  status: {
-    dead: "#ff4a4a",
-    inprogress: "#6573c3",
-    idea: "#d56edf",
-    live: "#579f57",
-  },
+export const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
@@ -40,5 +26,11 @@ export const theme = createTheme(adaptV4Theme({
       "Raleway",
       "Roboto"
     ].join(','),
-  }
-}));
+  },
+  status: {
+    dead: "#ff4a4a",
+    inprogress: "#6573c3",
+    idea: "#d56edf",
+    live: "#579f57",
+  },
+});
