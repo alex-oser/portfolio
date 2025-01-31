@@ -81,9 +81,6 @@ module.exports = {
             },
           },
         ],
-        plugins: [ 
-          `gatsby-remark-autolink-headers`,
-        ],
       },
     },
     {
