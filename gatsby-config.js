@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://alexoser.com`,
   },
   plugins: [
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
