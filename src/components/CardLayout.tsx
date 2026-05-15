@@ -1,6 +1,20 @@
 import { Card } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import clsx from "clsx";
+
+const PREFIX = 'CardLayout';
+
+const classes = {
+  root: `${PREFIX}-root`
+};
+
+const StyledCard = styled(Card)({
+  [`&.${classes.root}`]: {
+    width: "100%",
+    height: 200,
+    cursor: "pointer",
+  },
+});
 
 export const CardLayout = ({
   className,
@@ -9,14 +23,6 @@ export const CardLayout = ({
   className?: string;
   children: React.ReactNode;
 }) => {
-  const classes = useStyles();
-  return <Card className={clsx(classes.root, className)}>{children}</Card>;
-};
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    height: 200,
-    cursor: "pointer",
-  },
-});
+  return <StyledCard className={clsx(classes.root, className)}>{children}</StyledCard>;
+};

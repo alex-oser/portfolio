@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { styled } from '@mui/material/styles';
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { CssBaseline } from "@mui/material";
@@ -14,9 +15,31 @@ import {
   Theme,
   StyledEngineProvider,
 } from "@mui/material/styles";
-import makeStyles from "@mui/styles/makeStyles";
 import { theme } from "./theme";
 import Header from "./header";
+
+const PREFIX = 'Layout';
+
+const classes = {
+  layout: `${PREFIX}-layout`
+};
+
+const Root = styled('div')((
+  {
+    theme
+  }
+) => ({
+  [`&.${classes.layout}`]: {
+    margin: "auto",
+    maxWidth: 1400,
+    [theme.breakpoints.up("md")]: {
+      padding: `0 ${theme.spacing(10)}`,
+    },
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(3),
+    },
+  }
+}));
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -46,9 +69,9 @@ export const Layout = ({ children }: { children: any }) => {
 };
 
 const LayoutWrapper = ({ children }: { children: any }) => {
-  const classes = useStyles();
+
   return (
-    <div className={classes.layout}>
+    (<Root className={classes.layout}>
       <main>{children}</main>
       <footer
         style={{
@@ -59,23 +82,10 @@ const LayoutWrapper = ({ children }: { children: any }) => {
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a>
       </footer>
-    </div>
+    </Root>)
   );
 };
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-const useStyles = makeStyles(theme => ({
-  layout: {
-    margin: "auto",
-    maxWidth: 1400,
-    [theme.breakpoints.up("md")]: {
-      padding: `0 ${theme.spacing(10)}`,
-    },
-    [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(3),
-    },
-  },
-}));

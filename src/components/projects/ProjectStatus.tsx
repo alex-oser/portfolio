@@ -1,21 +1,19 @@
 import { Chip, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme } from '@mui/material/styles';
 
 export const ProjectStatus = ({ status }: { status: string }) => {
-  const formattedStatus: string = status.replace(/\s/g, "").toLowerCase();
-  const classes = useStyles({ formattedStatus });
-  return (
-    <Chip 
-      label={<Typography variant="subtitle2" style={{ fontWeight: 700 }}>{status}</Typography>} 
-      className={classes.chip} 
-      size="small" 
-    />);
-};
+  const theme = useTheme() as any;
+  const formattedStatus = status.replace(/\s/g, "").toLowerCase();
 
-const useStyles = makeStyles((theme: any) => ({
-  chip: {
-    marginLeft: theme.spacing(1),
-    alignSelf: "center",
-    backgroundColor: ({ formattedStatus }: { formattedStatus: string }) => theme.status[formattedStatus],
-  },
-}));
+  return (
+    <Chip
+      label={<Typography variant="subtitle2" style={{ fontWeight: 700 }}>{status}</Typography>}
+      size="small"
+      sx={{
+        ml: 1,
+        alignSelf: "center",
+        backgroundColor: theme.status?.[formattedStatus],
+      }}
+    />
+  );
+};

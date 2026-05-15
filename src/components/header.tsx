@@ -1,11 +1,52 @@
 import PropTypes from "prop-types";
+import { styled } from '@mui/material/styles';
 import { Link } from "gatsby";
-import makeStyles from '@mui/styles/makeStyles';
 import { LinkedIn } from "./socials/LinkedIn";
 import { Github } from "./socials/Github";
 
+const PREFIX = 'Header';
+
+const classes = {
+  link: `${PREFIX}-link`,
+  root: `${PREFIX}-root`,
+  headerContents: `${PREFIX}-headerContents`,
+  headerLeft: `${PREFIX}-headerLeft`
+};
+
+const Root = styled('div')((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.link}`]: {
+    color: "white !important",
+    textDecoration: "none",
+    margin: theme.spacing(1),
+  },
+
+  [`&.${classes.root}`]: {
+    top: 0,
+    left: "auto",
+    right: 0,
+    // position: "sticky",
+    height: theme.spacing(6),
+    marginBottom: theme.spacing(2),
+  },
+
+  [`& .${classes.headerContents}`]: {
+    display: "flex",
+    justifyContent: "space-around",
+    height: "100%",
+  },
+
+  [`& .${classes.headerLeft}`]: {
+    display: "flex",
+    alignItems: "center",
+  }
+}));
+
 const Header = ({ siteTitle }: { siteTitle: string }) => {
-  const classes = useStyles();
+
   // If already on the home page, scroll smoothly to section - else navigate normally
   const handleNavigation = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -23,7 +64,7 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
   };
 
   return (
-    <div className={classes.root}>
+    (<Root className={classes.root}>
       <div className={classes.headerContents}>
         <div className={classes.headerLeft}>
           <Link to="/" className={classes.link}>
@@ -56,34 +97,9 @@ const Header = ({ siteTitle }: { siteTitle: string }) => {
           </Link> */}
         </div>
       </div>
-    </div>
+    </Root>)
   );
 };
-
-const useStyles = makeStyles(theme => ({
-  link: {
-    color: "white !important",
-    textDecoration: "none",
-    margin: theme.spacing(1),
-  },
-  root: {
-    top: 0,
-    left: "auto",
-    right: 0,
-    // position: "sticky",
-    height: theme.spacing(6),
-    marginBottom: theme.spacing(2),
-  },
-  headerContents: {
-    display: "flex",
-    justifyContent: "space-around",
-    height: "100%",
-  },
-  headerLeft: {
-    display: "flex",
-    alignItems: "center",
-  },
-}));
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

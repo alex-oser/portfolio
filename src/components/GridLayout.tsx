@@ -1,32 +1,20 @@
 import { Typography } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
+import { styled } from '@mui/material/styles';
+const PREFIX = 'GridLayout';
 
-export const GridLayout = ({
-  children,
-  title,
-}: {
-  children: React.ReactNode;
-  title: string;
-}) => {
-  const classes = useStyles();
-
-  return (
-    <>
-      <Typography
-        variant="h4"
-        id={title.toLowerCase().replace(" ", "-")}
-        className={classes.title}
-      >
-        {title}
-      </Typography>
-      <div className={classes.grid}>{children}</div>
-    </>
-  );
+const classes = {
+  grid: `${PREFIX}-grid`,
+  title: `${PREFIX}-title`
 };
 
-const useStyles = makeStyles(theme => ({
-  grid: {
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.grid}`]: {
     display: "grid",
     alignItems: "center",
     gap: theme.spacing(1),
@@ -39,7 +27,31 @@ const useStyles = makeStyles(theme => ({
       gridTemplateColumns: "repeat(1, 1fr)",
     },
   },
-  title: {
+
+  [`& .${classes.title}`]: {
     marginBottom: theme.spacing(1),
-  },
+  }
 }));
+
+export const GridLayout = ({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) => {
+
+
+  return (
+    (<Root>
+      <Typography
+        variant="h4"
+        id={title.toLowerCase().replace(" ", "-")}
+        className={classes.title}
+      >
+        {title}
+      </Typography>
+      <div className={classes.grid}>{children}</div>
+    </Root>)
+  );
+};

@@ -1,19 +1,28 @@
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
+const PREFIX = 'LinkedIn';
 
-export const LinkedIn = () => {
-  const classes = useStyles();
-  return (
-    <a href="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link} aria-label="LinkedIn profile">
-      <LinkedInIcon />
-    </a>
-  )
-}
+const classes = {
+  link: `${PREFIX}-link`
+};
 
-const useStyles = makeStyles(theme => ({
-  link: {
+const Root = styled('a')((
+  {
+    theme
+  }
+) => ({
+  [`&.${classes.link}`]: {
     color: "white !important",
     textDecoration: "none",
     margin: theme.spacing(1),
-  },
+  }
 }));
+
+export const LinkedIn = () => {
+
+  return (
+    (<Root href="https://www.linkedin.com/in/alexander-oser-8901a5106/" className={classes.link} aria-label="LinkedIn profile">
+      <LinkedInIcon />
+    </Root>)
+  );
+}

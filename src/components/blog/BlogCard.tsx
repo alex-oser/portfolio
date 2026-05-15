@@ -1,7 +1,24 @@
 import { CardContent, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { CardLayout } from "../CardLayout";
 import { Link } from "gatsby";
+
+const PREFIX = 'BlogCard';
+
+const classes = {
+  link: `${PREFIX}-link`
+};
+
+const StyledCardLayout = styled(CardLayout)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.link}`]: {
+    textDecoration: "none",
+    height: "100%",
+  }
+}));
 
 export const BlogCard = ({
   title,
@@ -12,11 +29,11 @@ export const BlogCard = ({
   caption: string;
   date: string,
 }) => {
-  const classes = useStyles();
+
   const path = `blog/${title.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
-    <CardLayout>
+    (<StyledCardLayout>
       <Link to={path} className={classes.link}>
         <CardContent style={{ color: "white", }}>
           <Typography variant="h6"><strong>{title}</strong></Typography>
@@ -24,13 +41,6 @@ export const BlogCard = ({
           <Typography>{caption}</Typography>
         </CardContent>
       </Link>
-    </CardLayout>
+    </StyledCardLayout>)
   );
 };
-
-const useStyles = makeStyles(theme => ({
-  link: {
-    textDecoration: "none",
-    height: "100%",
-  },
-}));
