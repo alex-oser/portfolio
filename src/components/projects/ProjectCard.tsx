@@ -1,10 +1,33 @@
 import { CardContent, CardActions, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { CardLayout } from "../CardLayout";
 import { ProjectStatus } from "./ProjectStatus";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Link } from "gatsby";
+
+const PREFIX = 'ProjectCard';
+
+const classes = {
+  layout: `${PREFIX}-layout`,
+  link: `${PREFIX}-link`,
+  icon: `${PREFIX}-icon`
+};
+
+const StyledCardLayout = styled(CardLayout)({
+  [`&.${classes.layout}`]: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  [`& .${classes.link}`]: {
+    textDecoration: "none",
+    height: "100%",
+  },
+  [`& .${classes.icon}`]: {
+    alignItems: "center",
+  },
+});
 
 const linkStyle = { display: "flex " };
 const GitHubLink = ({ url }: { url: string }) => (
@@ -41,10 +64,10 @@ export const ProjectCard = ({ frontmatter } : any) => {
     link,
     repo,
   } = frontmatter;
-  const classes = useStyles();
+
   const path = `projects/${title.replace(/\s+/g, "-").toLowerCase()}`;
   return (
-    <CardLayout className={classes.layout}>
+    (<StyledCardLayout className={classes.layout}>
       <Link to={path} className={classes.link}>
         <CardContent style={{ color: "white" }}>
           <div style={{ display: "flex" }}>
@@ -60,21 +83,6 @@ export const ProjectCard = ({ frontmatter } : any) => {
         {repo && <GitHubLink url={repo} />}
         {link && <SiteLink url={link} />}
       </CardActions>
-    </CardLayout>
+    </StyledCardLayout>)
   );
 };
-
-const useStyles = makeStyles({
-  layout: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  link: {
-    textDecoration: "none",
-    height: "100%",
-  },
-  icon: {
-    alignItems: "center",
-  },
-});

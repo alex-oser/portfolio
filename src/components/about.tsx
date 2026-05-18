@@ -1,7 +1,31 @@
 import { forwardRef, useRef } from "react";
+import { styled } from '@mui/material/styles';
 import { Typography, useMediaQuery } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { StaticImage } from "gatsby-plugin-image";
+
+const PREFIX = 'Profile';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  textContainer: `${PREFIX}-textContainer`,
+  flex: `${PREFIX}-flex`
+};
+
+const Root = styled('div')({
+  [`&.${classes.root}`]: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignSelf: "center",
+  },
+  [`& .${classes.textContainer}`]: {
+    alignSelf: "center",
+    maxWidth: 600,
+  },
+  [`& .${classes.flex}`]: {
+    display: "flex",
+  },
+});
 
 export const Profile = forwardRef((_props: any, ref: any) => {
   return (
@@ -13,7 +37,7 @@ export const Profile = forwardRef((_props: any, ref: any) => {
 });
 
 export const About = () => {
-  const classes = useStyles();
+
   const fromRef = useRef<HTMLDivElement>(null);
   const fromRefMobile = useRef<HTMLDivElement>(null);
   const toRef = useRef<HTMLDivElement>(null);
@@ -21,7 +45,7 @@ export const About = () => {
   const smDown = useMediaQuery(theme => theme.breakpoints.down("sm"));
 
   return (
-    <div className={classes.root}>
+    (<Root className={classes.root}>
       <div className={classes.flex}>
         <div className={classes.textContainer}>
           <Typography variant="h3">Hi, I'm Alex</Typography>
@@ -51,22 +75,6 @@ export const About = () => {
         </div>
       </div>
       {smDown && <Profile ref={fromRefMobile} />}
-    </div>
+    </Root>)
   );
 };
-
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignSelf: "center",
-  },
-  textContainer: {
-    alignSelf: "center",
-    maxWidth: 600,
-  },
-  flex: {
-    display: "flex",
-  },
-});
